@@ -1,5 +1,6 @@
 ﻿using System;
 using ConsoleAdventure.Project;
+using ConsoleAdventure.Project.Controllers;
 
 namespace ConsoleAdventure
 {
@@ -7,7 +8,9 @@ namespace ConsoleAdventure
     {
         public static void Main(string[] args)
         {
-
+            Console.Clear();
+            GameController gc = new GameController();
+            gc.Run();
         }
     }
 }
