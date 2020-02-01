@@ -1,3 +1,4 @@
+using ConsoleAdventure.Project.Controllers;
 using ConsoleAdventure.Project.Interfaces;
 
 namespace ConsoleAdventure.Project.Models
@@ -36,10 +37,6 @@ namespace ConsoleAdventure.Project.Models
 
             Item key = new Item("Das Key", "you can unlock the damn door");
             Room3.Items.Add(key);
-            Item lighter = new Item("Lighter", "Used to light the torch");
-            Room1.Items.Add(lighter);
-            Item torch = new Item("torch", "Use This to Light the room up!");
-            Room2.Items.Add(torch);
 
             Player One = new Player("");
             CurrentPlayer = One;

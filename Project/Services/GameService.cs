@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using ConsoleAdventure.Project.Controllers;
 using ConsoleAdventure.Project.Interfaces;
 using ConsoleAdventure.Project.Models;
 
@@ -26,12 +27,13 @@ namespace ConsoleAdventure.Project
 
         private void GetRoomDescription()
         {
-            var torch = _game.CurrentPlayer.Inventory.Find(i => i.Name == "torch");
-            if(torch.Lit == true);
+            if(_game.CurrentRoom.Name == "room 5")
             {
-                Messages.Add(_game.CurrentRoom.Description);
+                Console.WriteLine($"{_game.CurrentPlayer.Name} the floor gave out underneath you! Game over!");
+                Reset();
             }
-            Messages.Add("I cant see shit in here!");
+                Messages.Add(_game.CurrentRoom.Description);
+            
         }
 
         public void Help()
@@ -72,13 +74,15 @@ namespace ConsoleAdventure.Project
         ///</summary>
         public void Reset()
         {
-           Console.Clear();
-           _game.Setup();
+            _game.CurrentPlayer.Inventory.Clear();
+            Console.WriteLine("Why Hello! And What might your name be?");
+            Setup(Console.ReadLine());
         }
 
         public void Setup(string playerName)
         {
             _game.CurrentPlayer.Name = playerName;
+            _game.Setup();
             Messages.Add($"welcome to the thunderdome {_game.CurrentPlayer.Name}");
             Messages.Add($"{_game.CurrentRoom.Description}");
         }
@@ -97,7 +101,19 @@ namespace ConsoleAdventure.Project
         ///</summary>
         public void UseItem(string itemName)
         {
-            throw new System.NotImplementedException();
+
+            if (_game.CurrentPlayer.Inventory.Exists(i => i.Name.ToLower() == itemName))
+            {
+                if(_game.CurrentRoom.Name == "room 8" &&  itemName == "das key")
+                {
+                    Messages.Add($"you win {_game.CurrentPlayer.Name}");
+                    Reset();
+                    return;
+                }
+                Messages.Add($"{_game.CurrentPlayer.Name} you cant use this here!");
+            }
+            Messages.Add("There is nothing in your inventory that matches.");
+            return;
         }
     }
 }
