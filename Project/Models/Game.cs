@@ -37,6 +37,7 @@ namespace ConsoleAdventure.Project.Models
 
             Item key = new Item("Das Key", "you can unlock the damn door");
             Room3.Items.Add(key);
+            Room8.Useables.Add(key, "youve unlocked the door and won the game want to play again?");
 
             Player One = new Player("");
             CurrentPlayer = One;

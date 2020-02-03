@@ -102,16 +102,21 @@ namespace ConsoleAdventure.Project
         ///</summary>
         public void UseItem(string itemName)
         {
-
-            if (_game.CurrentPlayer.Inventory.Exists(i => i.Name.ToLower() == itemName))
+            for(int i = 0; i < _game.CurrentPlayer.Inventory.Count; i++)
             {
-                if(_game.CurrentRoom.Name == "room 8" &&  itemName == "das key")
+                var item = _game.CurrentPlayer.Inventory[i];
+                if(item.Name.ToLower() == itemName)
                 {
-                    Messages.Add($"you win {_game.CurrentPlayer.Name}");
-                    Reset();
-                    return;
+                    if(_game.CurrentRoom.Useables.ContainsKey(item))
+                    {
+                        
+                      
+                      _game.CurrentRoom.Description = _game.CurrentRoom.Useables[item];
+                      Messages.Add($"{_game.CurrentPlayer.Name} you win");
+                      return;   
+                    }
+                    Messages.Add("your item has no use here");
                 }
-                Messages.Add($"{_game.CurrentPlayer.Name} you cant use this here!");
             }
             Messages.Add("There is nothing in your inventory that matches.");
             return;
