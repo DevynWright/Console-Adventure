@@ -1,6 +1,5 @@
 using System;
 using System.Collections.Generic;
-using ConsoleAdventure.Project.Controllers;
 using ConsoleAdventure.Project.Interfaces;
 using ConsoleAdventure.Project.Models;
 
@@ -23,6 +22,8 @@ namespace ConsoleAdventure.Project
                 GetRoomDescription();
                 return;
             }
+            Messages.Add("There is no exit that way my man");
+            return;
         }
 
         private void GetRoomDescription()
